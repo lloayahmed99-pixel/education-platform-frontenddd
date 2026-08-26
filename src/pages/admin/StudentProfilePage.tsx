@@ -133,6 +133,40 @@ const StudentProfilePage = () => {
             ))}
           </div>
         </div>
+      {/* Video Progress */}
+      {student.videoProgress && student.videoProgress.length > 0 && (
+        <div className="bg-card border border-border rounded-2xl p-6">
+          <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <Video className="w-5 h-5 text-primary" />
+            سجل مشاهدات الفيديوهات ({student.videoProgress.length})
+          </h2>
+          <div className="space-y-3">
+            {student.videoProgress.map((prog: any) => (
+              <div key={prog.id} className="flex items-center justify-between bg-background rounded-xl p-4">
+                <div>
+                  <span className="text-white font-semibold text-sm">{prog.video_title}</span>
+                  <p className="text-xs text-muted mt-0.5">{prog.course_title}</p>
+                  <p className="text-xs text-muted mt-1 flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    آخر مشاهدة: {new Date(prog.last_watched_at).toLocaleDateString('ar-EG')}
+                  </p>
+                </div>
+                <div className="text-left flex flex-col items-end gap-2">
+                  <span className={`text-sm font-bold ${prog.completed ? 'text-green-400' : 'text-primary'}`}>
+                    {Math.round(prog.completion_percentage)}%
+                  </span>
+                  <div className="w-24 h-2 bg-card rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full ${prog.completed ? 'bg-green-400' : 'bg-primary'}`}
+                      style={{ width: `${Math.min(100, Math.max(0, prog.completion_percentage))}%` }}
+                    />
+                  </div>
+                  {prog.completed && <span className="text-[10px] text-green-400 font-bold bg-green-400/10 px-2 py-0.5 rounded-full">مكتمل</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

@@ -95,25 +95,6 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Demo credentials */}
-          <div className="mt-6 border-t border-border pt-4">
-            <p className="text-xs text-muted text-center mb-3">بيانات الدخول التجريبية:</p>
-            <div className="space-y-2 text-xs">
-              {[
-                { role: 'مدير', email: 'admin@platform.com', pass: 'Admin@123456', color: 'text-blue-400' },
-                { role: 'مشرف', email: 'mod1@platform.com', pass: 'Mod@123456', color: 'text-green-400' },
-                { role: 'طالب', email: 'student1@platform.com', pass: 'Student@123456', color: 'text-primary' },
-              ].map(({ role, email: e, pass, color }) => (
-                <button
-                  key={e}
-                  onClick={() => { setEmail(e); setPassword(pass); }}
-                  className={`w-full text-right bg-background/50 border border-border rounded-lg px-3 py-2 hover:border-primary transition-colors ${color}`}
-                >
-                  <span className="font-bold">{role}:</span> {e}
-                </button>
-              ))}
-            </div>
-          </div>
 
           <p className="text-center text-muted text-sm mt-4">
             ليس لديك حساب؟{' '}
