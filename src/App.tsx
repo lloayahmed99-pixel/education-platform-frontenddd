@@ -29,6 +29,7 @@ import StudentsPage from './pages/admin/StudentsPage';
 import StudentProfilePage from './pages/admin/StudentProfilePage';
 import ModeratorsPage from './pages/admin/ModeratorsPage';
 import AdminCoursesPage from './pages/admin/CoursesPage';
+import CourseContentPage from './pages/admin/CourseContentPage';
 import SettingsPage from './pages/admin/SettingsPage';
 
 // Moderator Pages
@@ -124,6 +125,7 @@ const App = () => {
             <Route path="students/:id" element={<StudentProfilePage />} />
             <Route path="moderators" element={<ModeratorsPage />} />
             <Route path="courses" element={<AdminCoursesPage />} />
+            <Route path="courses/:id/content" element={<CourseContentPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route
               path="statistics"

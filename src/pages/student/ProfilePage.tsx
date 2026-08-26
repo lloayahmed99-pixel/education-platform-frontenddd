@@ -5,11 +5,13 @@ import api from '../../api/axios';
 import { authApi } from '../../api/auth';
 import { User, Camera, Mail, Lock, Save, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ImageUpload from '../../components/ImageUpload';
 
 const ProfilePage = () => {
   const { user, updateUser, logout } = useAuthStore();
   const qc = useQueryClient();
   const [name, setName] = useState(user?.name || '');
+  const [profileImage, setProfileImage] = useState(user?.profile_image || '');
   const [saving, setSaving] = useState(false);
 
   const { data: stats } = useQuery({
@@ -20,8 +22,8 @@ const ProfilePage = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await api.put('/auth/me', { name });
-      updateUser({ name });
+      await api.put('/users/profile', { name, profile_image: profileImage });
+      updateUser({ name, profile_image: profileImage });
       toast.success('تم حفظ التغييرات');
     } catch {
       toast.error('حدث خطأ في الحفظ');
@@ -42,15 +44,15 @@ const ProfilePage = () => {
 
       {/* Avatar Section */}
       <div className="bg-card border border-border rounded-2xl p-6 flex items-center gap-6">
-        <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary text-2xl font-bold flex-shrink-0">
-          {user?.profile_image ? (
-            <img src={user.profile_image} alt={user.name} className="w-full h-full rounded-full object-cover" />
+        <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary text-2xl font-bold flex-shrink-0 overflow-hidden">
+          {profileImage || user?.profile_image ? (
+            <img src={profileImage || user?.profile_image} alt={user?.name} className="w-full h-full object-cover" />
           ) : (
             getInitials(user?.name || 'U')
           )}
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white">{user?.name}</h2>
+          <h2 className="text-xl font-bold text-white">{name}</h2>
           <p className="text-muted text-sm">{user?.email}</p>
           <span className="inline-block mt-2 bg-primary/20 text-primary text-xs px-3 py-1 rounded-full font-semibold">
             طالب
@@ -76,6 +78,13 @@ const ProfilePage = () => {
       {/* Edit Info */}
       <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
         <h3 className="font-bold text-white text-lg">تعديل المعلومات</h3>
+        
+        <ImageUpload 
+          label="الصورة الشخصية"
+          value={profileImage}
+          onChange={(url) => setProfileImage(url)}
+        />
+        
         <div>
           <label className="text-sm text-muted font-semibold block mb-2">الاسم</label>
           <input

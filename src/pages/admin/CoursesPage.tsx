@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import coursesApi from '../../api/courses';
-import { BookOpen, Plus, Edit, Trash2, Eye, EyeOff, X, Search } from 'lucide-react';
+import { BookOpen, Plus, Edit, Trash2, Eye, EyeOff, X, Search, List } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ImageUpload from '../../components/ImageUpload';
 
 const AdminCoursesPage = () => {
   const qc = useQueryClient();
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [showForm, setShowForm] = useState(false);
@@ -15,7 +18,7 @@ const AdminCoursesPage = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ['adminCourses', search, page],
-    queryFn: () => coursesApi.getAll({ search, page, limit: 20 }).then(r => r.data),
+    queryFn: () => coursesApi.getAllAdmin({ search, page, limit: 20 }).then(r => r.data),
     keepPreviousData: true,
   } as any);
 
@@ -82,7 +85,6 @@ const AdminCoursesPage = () => {
               {[
                 { key: 'title', label: 'العنوان', type: 'text' },
                 { key: 'description', label: 'الوصف', type: 'textarea' },
-                { key: 'thumbnail', label: 'رابط الصورة المصغرة', type: 'url' },
                 { key: 'price', label: 'السعر (جنيه)', type: 'number' },
                 { key: 'duration_hours', label: 'المدة (ساعات)', type: 'number' },
               ].map(f => (
@@ -98,6 +100,12 @@ const AdminCoursesPage = () => {
                   )}
                 </div>
               ))}
+              
+              <ImageUpload
+                label="صورة الكورس"
+                value={form.thumbnail}
+                onChange={(url) => setForm(p => ({ ...p, thumbnail: url }))}
+              />
               <button onClick={() => createMutation.mutate()} disabled={createMutation.isPending || !form.title}
                 className="w-full bg-primary hover:bg-amber-500 text-white font-bold py-3 rounded-xl disabled:opacity-60">
                 {createMutation.isPending ? 'جاري الحفظ...' : 'حفظ'}
@@ -162,8 +170,11 @@ const AdminCoursesPage = () => {
                       <button onClick={() => publishMutation.mutate({ id: course.id, published: !!course.published })} title={course.published ? 'إخفاء' : 'نشر'} className={course.published ? 'text-yellow-400 hover:text-yellow-300' : 'text-green-400 hover:text-green-300'}>
                         {course.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
-                      <button onClick={() => openEdit(course)} className="text-blue-400 hover:text-blue-300"><Edit className="w-4 h-4" /></button>
-                      <button onClick={() => setDeleteConfirm(course.id)} className="text-red-400 hover:text-red-300"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => navigate(`/admin/courses/${course.id}/content`)} title="إدارة المحتوى" className="text-purple-400 hover:text-purple-300">
+                        <List className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => openEdit(course)} title="تعديل الكورس" className="text-blue-400 hover:text-blue-300"><Edit className="w-4 h-4" /></button>
+                      <button onClick={() => setDeleteConfirm(course.id)} title="حذف" className="text-red-400 hover:text-red-300"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
