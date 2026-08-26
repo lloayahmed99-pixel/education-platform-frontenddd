@@ -49,6 +49,24 @@ const StudentProfilePage = () => {
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-white">{student.name}</h1>
           <p className="text-muted text-sm" dir="ltr">{student.email}</p>
+          
+          {(student.phone || student.parent_phone) && (
+            <div className="mt-2 space-y-1">
+              {student.phone && (
+                <p className="text-sm text-gray-300">
+                  <span className="text-muted text-xs ml-2">هاتف الطالب:</span> 
+                  <span dir="ltr">{student.phone}</span>
+                </p>
+              )}
+              {student.parent_phone && (
+                <p className="text-sm text-gray-300">
+                  <span className="text-muted text-xs ml-2">هاتف ولي الأمر:</span> 
+                  <span dir="ltr">{student.parent_phone}</span>
+                </p>
+              )}
+            </div>
+          )}
+
           <div className="flex gap-3 mt-3 flex-wrap">
             <span className={`text-xs px-3 py-1 rounded-full font-semibold ${
               student.status === 'active' ? 'bg-green-400/20 text-green-400' :

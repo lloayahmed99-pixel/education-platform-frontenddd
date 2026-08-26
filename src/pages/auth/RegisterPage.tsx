@@ -10,6 +10,8 @@ const RegisterPage = () => {
   const { login } = useAuthStore();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [parentPhone, setParentPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +19,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword || !phone || !parentPhone) {
       toast.error('يرجى ملء جميع الحقول');
       return;
     }
@@ -31,7 +33,7 @@ const RegisterPage = () => {
     }
     setLoading(true);
     try {
-      const res = await authApi.register(name, email, password);
+      const res = await authApi.register(name, email, password, phone, parentPhone);
       login(res.data.token, res.data.user);
       toast.success('تم التسجيل بنجاح! مرحباً بك');
       navigate('/student/dashboard');
@@ -57,13 +59,35 @@ const RegisterPage = () => {
           <h2 className="text-xl font-bold text-white mb-6 text-center">إنشاء حساب جديد</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-muted mb-2">الاسم الكامل</label>
+              <label className="block text-sm font-semibold text-muted mb-2">الاسم رباعي</label>
               <input
                 type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                placeholder="أحمد محمد"
+                placeholder="الاسم بالكامل"
                 className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white placeholder-muted focus:outline-none focus:border-primary transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-muted mb-2">رقم الهاتف (الخاص بك)</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+                placeholder="01xxxxxxxxx"
+                dir="ltr"
+                className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white placeholder-muted focus:outline-none focus:border-primary transition-colors text-left"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-muted mb-2">رقم هاتف ولي الأمر</label>
+              <input
+                type="tel"
+                value={parentPhone}
+                onChange={e => setParentPhone(e.target.value)}
+                placeholder="01xxxxxxxxx"
+                dir="ltr"
+                className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white placeholder-muted focus:outline-none focus:border-primary transition-colors text-left"
               />
             </div>
             <div>
