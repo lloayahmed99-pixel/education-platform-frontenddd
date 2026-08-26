@@ -133,6 +133,8 @@ const StudentProfilePage = () => {
             ))}
           </div>
         </div>
+      )}
+
       {/* Video Progress */}
       {student.videoProgress && student.videoProgress.length > 0 && (
         <div className="bg-card border border-border rounded-2xl p-6">
