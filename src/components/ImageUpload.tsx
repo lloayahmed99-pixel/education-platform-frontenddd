@@ -57,11 +57,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange, label = 'ا�
 
   return (
     <div className="space-y-2">
-      <label className="text-sm text-gray-600 font-semibold block">{label}</label>
+      <label className="text-sm text-muted font-semibold block">{label}</label>
       
       <div className="flex items-start gap-4">
         {/* Preview */}
-        <div className="relative w-32 h-32 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center overflow-hidden group">
+        <div className="relative w-32 h-32 rounded-xl border-2 border-dashed border-border bg-background flex flex-col items-center justify-center overflow-hidden group">
           {value ? (
             <>
               <img src={value} alt="Preview" className="w-full h-full object-cover" />
@@ -76,7 +76,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange, label = 'ا�
               </div>
             </>
           ) : (
-            <ImageIcon className="w-8 h-8 text-gray-300 mb-2" />
+            <ImageIcon className="w-8 h-8 text-muted mb-2" />
           )}
         </div>
 
@@ -93,19 +93,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange, label = 'ا�
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
-            className="w-full bg-gray-50 border border-gray-200 hover:border-indigo-400 text-gray-700 rounded-xl px-4 py-3 flex items-center justify-center gap-2 transition-colors disabled:opacity-60 h-32"
+            className="w-full bg-background border border-border hover:border-primary text-white rounded-xl px-4 py-3 flex items-center justify-center gap-2 transition-colors disabled:opacity-60 h-32"
           >
             {uploading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin text-indigo-600" />
+                <Loader2 className="w-5 h-5 animate-spin text-primary" />
                 <span>جاري الرفع...</span>
               </>
             ) : (
               <>
-                <Upload className="w-5 h-5 text-indigo-600" />
+                <Upload className="w-5 h-5 text-primary" />
                 <div className="text-right">
-                  <span className="block font-semibold text-gray-700">اضغط لاختيار صورة</span>
-                  <span className="block text-xs text-gray-400 mt-1">JPG, PNG, GIF (الحد الأقصى 5MB)</span>
+                  <span className="block font-semibold text-white">اضغط لاختيار صورة</span>
+                  <span className="block text-xs text-muted mt-1">JPG, PNG, GIF (الحد الأقصى 5MB)</span>
                 </div>
               </>
             )}

@@ -42,10 +42,10 @@ const CourseDetailPage = () => {
   if (isLoading) {
     return (
       <div className="animate-pulse space-y-4">
-        <div className="h-10 bg-gray-200 rounded-xl w-48" />
+        <div className="h-10 bg-background rounded-xl w-48" />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 h-96 bg-gray-200 rounded-2xl" />
-          <div className="h-96 bg-gray-200 rounded-2xl" />
+          <div className="lg:col-span-2 h-96 bg-background rounded-2xl" />
+          <div className="h-96 bg-background rounded-2xl" />
         </div>
       </div>
     );
@@ -53,7 +53,7 @@ const CourseDetailPage = () => {
 
   if (!course) {
     return (
-      <div className="text-center py-20 text-gray-500">
+      <div className="text-center py-20 text-muted">
         <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-30" />
         <p>لم يتم العثور على الكورس</p>
       </div>
@@ -66,11 +66,11 @@ const CourseDetailPage = () => {
       <div className="flex items-center gap-3">
         <button
           onClick={() => navigate('/student/courses')}
-          className="text-gray-500 hover:text-gray-900 transition-colors"
+          className="text-muted hover:text-white transition-colors"
         >
           <ArrowRight className="w-5 h-5" />
         </button>
-        <h1 className="text-xl font-bold text-gray-900">{course.title}</h1>
+        <h1 className="text-xl font-bold text-white">{course.title}</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -88,8 +88,8 @@ const CourseDetailPage = () => {
               }}
             />
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm flex items-center justify-center h-64">
-              <div className="text-center text-gray-500">
+            <div className="bg-card rounded-2xl border border-border shadow-lg flex items-center justify-center h-64">
+              <div className="text-center text-muted">
                 <PlayCircle className="w-12 h-12 mx-auto mb-2 opacity-40" />
                 <p>اختر فيديو للمشاهدة</p>
               </div>
@@ -97,10 +97,10 @@ const CourseDetailPage = () => {
           )}
 
           {/* Course Info */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-2">{course.title}</h2>
-            {course.description && <p className="text-gray-500 text-sm leading-relaxed">{course.description}</p>}
-            <div className="flex flex-wrap gap-4 mt-4 text-sm text-gray-500">
+          <div className="bg-card rounded-2xl border border-border shadow-lg p-6">
+            <h2 className="text-lg font-bold text-white mb-2">{course.title}</h2>
+            {course.description && <p className="text-muted text-sm leading-relaxed">{course.description}</p>}
+            <div className="flex flex-wrap gap-4 mt-4 text-sm text-muted">
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
                 {course.duration_hours} ساعة
@@ -115,38 +115,38 @@ const CourseDetailPage = () => {
 
         {/* Modules Sidebar */}
         <div className="space-y-3">
-          <h3 className="font-bold text-gray-900 text-lg">محتوى الكورس</h3>
+          <h3 className="font-bold text-white text-lg">محتوى الكورس</h3>
           {course.modules?.map((module: any, idx: number) => (
-            <div key={module.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div key={module.id} className="bg-card rounded-xl border border-border shadow-lg overflow-hidden">
               <button
                 onClick={() => toggleModule(idx)}
-                className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between p-4 hover:bg-background transition-colors"
               >
-                <span className="font-semibold text-gray-900 text-sm">{module.title}</span>
+                <span className="font-semibold text-white text-sm">{module.title}</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-500">{module.videos?.length || 0} فيديو</span>
+                  <span className="text-xs text-muted">{module.videos?.length || 0} فيديو</span>
                   {expandedModules.includes(idx)
-                    ? <ChevronUp className="w-4 h-4 text-gray-500" />
-                    : <ChevronDown className="w-4 h-4 text-gray-500" />
+                    ? <ChevronUp className="w-4 h-4 text-muted" />
+                    : <ChevronDown className="w-4 h-4 text-muted" />
                   }
                 </div>
               </button>
               {expandedModules.includes(idx) && (
-                <div className="border-t border-gray-200">
+                <div className="border-t border-border">
                   {module.videos?.map((video: any) => (
                     <button
                       key={video.id}
                       onClick={() => setActiveVideo(video)}
-                      className={`w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors text-right ${
-                        activeVideo?.id === video.id ? 'bg-indigo-50 border-r-2 border-indigo-600' : ''
+                      className={`w-full flex items-center gap-3 p-3 hover:bg-background transition-colors text-right ${
+                        activeVideo?.id === video.id ? 'bg-primary/20 border-r-2 border-primary' : ''
                       }`}
                     >
-                      <PlayCircle className={`w-4 h-4 flex-shrink-0 ${activeVideo?.id === video.id ? 'text-indigo-600' : 'text-gray-500'}`} />
-                      <span className={`text-sm flex-1 ${activeVideo?.id === video.id ? 'text-indigo-600 font-semibold' : 'text-gray-500'}`}>
+                      <PlayCircle className={`w-4 h-4 flex-shrink-0 ${activeVideo?.id === video.id ? 'text-primary' : 'text-muted'}`} />
+                      <span className={`text-sm flex-1 ${activeVideo?.id === video.id ? 'text-primary font-semibold' : 'text-muted'}`}>
                         {video.title}
                       </span>
                       {video.duration_seconds && (
-                        <span className="text-xs text-gray-500 flex-shrink-0">
+                        <span className="text-xs text-muted flex-shrink-0">
                           {Math.floor(video.duration_seconds / 60)}:{String(video.duration_seconds % 60).padStart(2, '0')}
                         </span>
                       )}

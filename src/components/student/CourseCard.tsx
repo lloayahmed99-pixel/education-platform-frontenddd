@@ -41,9 +41,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   });
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group shadow-sm flex flex-col">
+    <div className="bg-card rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300 group shadow-lg flex flex-col">
       {/* Thumbnail */}
-      <div className="relative h-44 overflow-hidden bg-gray-100 flex-shrink-0">
+      <div className="relative h-44 overflow-hidden bg-background flex-shrink-0">
         {course.thumbnail ? (
           <img
             src={course.thumbnail}
@@ -53,29 +53,29 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <PlayCircle className="w-12 h-12 text-gray-300" />
+            <PlayCircle className="w-12 h-12 text-muted" />
           </div>
         )}
         {/* Price Badge */}
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-indigo-600 shadow-sm">
+        <div className="absolute top-3 left-3 bg-card/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-primary shadow-lg">
           {course.price > 0 ? `${course.price} ج.م` : 'مجاني'}
         </div>
       </div>
 
       {/* Content */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-base font-bold text-gray-900 mb-1 line-clamp-2 leading-snug">{course.title}</h3>
+        <h3 className="text-base font-bold text-white mb-1 line-clamp-2 leading-snug">{course.title}</h3>
 
         {course.instructor && (
-          <p className="text-gray-500 text-sm mb-2 font-medium">{course.instructor}</p>
+          <p className="text-muted text-sm mb-2 font-medium">{course.instructor}</p>
         )}
 
         {course.description && (
-          <p className="text-gray-400 text-xs mb-3 line-clamp-2 leading-relaxed">{course.description}</p>
+          <p className="text-muted text-xs mb-3 line-clamp-2 leading-relaxed">{course.description}</p>
         )}
 
         {/* Stats Row */}
-        <div className="flex items-center gap-3 text-xs text-gray-500 mb-4 mt-auto">
+        <div className="flex items-center gap-3 text-xs text-muted mb-4 mt-auto">
           {course.rating && course.rating > 0 && (
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 text-amber-400 fill-current" />
@@ -100,7 +100,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <div className="space-y-2">
           <button
             onClick={() => navigate(`/student/courses/${course.id}`)}
-            className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-2 px-4 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
+            className="w-full border border-primary text-primary hover:bg-primary hover:text-white font-bold py-2 px-4 rounded-xl transition-colors text-sm flex items-center justify-center gap-2"
           >
             <PlayCircle className="w-4 h-4" />
             الدخول للكورس
@@ -109,7 +109,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <button
               onClick={() => enrollMutation.mutate()}
               disabled={enrollMutation.isPending}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl transition-colors text-sm disabled:opacity-60 flex items-center justify-center gap-2"
+              className="w-full bg-primary hover:brightness-110 text-white font-bold py-2 px-4 rounded-xl transition-colors text-sm disabled:opacity-60 flex items-center justify-center gap-2"
             >
               {enrollMutation.isPending ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

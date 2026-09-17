@@ -11,9 +11,9 @@ const STATUS_LABELS: Record<string, string> = {
   suspended: 'موقوف',
 };
 const STATUS_COLORS: Record<string, string> = {
-  active: 'bg-emerald-100 text-emerald-600',
-  inactive: 'bg-gray-100 text-gray-500',
-  suspended: 'bg-red-50 text-red-500',
+  active: 'bg-green-500/20 text-green-400',
+  inactive: 'bg-background text-muted',
+  suspended: 'bg-red-500/20 text-red-400',
 };
 
 const StudentsPage = () => {
@@ -59,13 +59,13 @@ const StudentsPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-4 justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Users className="w-7 h-7 text-indigo-600" />
+        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <Users className="w-7 h-7 text-primary" />
           إدارة الطلاب
         </h1>
         <button
           onClick={() => setShowCreate(true)}
-          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-sm"
+          className="flex items-center gap-2 bg-primary hover:brightness-110 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-lg"
         >
           <Plus className="w-4 h-4" />
           طالب جديد
@@ -75,18 +75,18 @@ const StudentsPage = () => {
       {/* Filters */}
       <div className="flex flex-wrap gap-3">
         <div className="relative flex-1 min-w-48">
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
           <input
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
             placeholder="بحث بالاسم أو البريد..."
-            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 pr-10 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600 shadow-sm"
+            className="w-full bg-card border border-border rounded-xl px-4 py-2 pr-10 text-white placeholder-muted focus:outline-none focus:border-primary shadow-lg"
           />
         </div>
         <select
           value={status}
           onChange={e => { setStatus(e.target.value); setPage(1); }}
-          className="bg-white border border-gray-200 rounded-xl px-4 py-2 text-gray-900 focus:outline-none focus:border-indigo-600 shadow-sm"
+          className="bg-card border border-border rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary shadow-lg"
         >
           <option value="">كل الحالات</option>
           <option value="active">نشط</option>
@@ -97,11 +97,11 @@ const StudentsPage = () => {
 
       {/* Create Modal */}
       {showCreate && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 w-full max-w-md shadow-xl">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-md shadow-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold text-gray-900">إنشاء طالب جديد</h2>
-              <button onClick={() => setShowCreate(false)}><X className="w-5 h-5 text-gray-400 hover:text-gray-600" /></button>
+              <h2 className="text-lg font-bold text-white">إنشاء طالب جديد</h2>
+              <button onClick={() => setShowCreate(false)}><X className="w-5 h-5 text-muted hover:text-white" /></button>
             </div>
             <div className="space-y-4">
               {[
@@ -110,20 +110,20 @@ const StudentsPage = () => {
                 { key: 'password', label: 'كلمة المرور', type: 'password', dir: 'ltr' },
               ].map(f => (
                 <div key={f.key}>
-                  <label className="text-sm text-gray-500 font-semibold block mb-1">{f.label}</label>
+                  <label className="text-sm text-muted font-semibold block mb-1">{f.label}</label>
                   <input
                     type={f.type}
                     dir={f.dir}
                     value={(newStudent as any)[f.key]}
                     onChange={e => setNewStudent(p => ({ ...p, [f.key]: e.target.value }))}
-                    className="w-full bg-[#f4f7fe] border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-600"
+                    className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary"
                   />
                 </div>
               ))}
               <button
                 onClick={() => createMutation.mutate()}
                 disabled={createMutation.isPending}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 shadow-sm"
+                className="w-full bg-primary hover:brightness-110 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 shadow-lg"
               >
                 {createMutation.isPending ? 'جاري الإنشاء...' : 'إنشاء'}
               </button>
@@ -134,13 +134,13 @@ const StudentsPage = () => {
 
       {/* Delete Confirm */}
       {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 max-w-sm w-full text-center shadow-xl">
-            <Trash2 className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-lg font-bold text-gray-900 mb-2">تأكيد الحذف</h2>
-            <p className="text-gray-500 text-sm mb-6">هل أنت متأكد من حذف هذا الطالب؟ لا يمكن التراجع.</p>
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-card border border-border rounded-2xl p-6 max-w-sm w-full text-center shadow-lg">
+            <Trash2 className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <h2 className="text-lg font-bold text-white mb-2">تأكيد الحذف</h2>
+            <p className="text-muted text-sm mb-6">هل أنت متأكد من حذف هذا الطالب؟ لا يمكن التراجع.</p>
             <div className="flex gap-3">
-              <button onClick={() => setDeleteConfirm(null)} className="flex-1 border border-gray-200 text-gray-600 py-2 rounded-xl hover:bg-gray-50 transition-colors">إلغاء</button>
+              <button onClick={() => setDeleteConfirm(null)} className="flex-1 border border-border text-muted py-2 rounded-xl hover:bg-background transition-colors">إلغاء</button>
               <button
                 onClick={() => deleteMutation.mutate(deleteConfirm)}
                 className="flex-1 bg-red-600 text-white py-2 rounded-xl font-bold hover:bg-red-700 transition-colors"
@@ -151,57 +151,57 @@ const StudentsPage = () => {
       )}
 
       {/* Table */}
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-card border border-border rounded-2xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50/50">
+              <tr className="border-b border-border bg-background/50">
                 {['الطالب', 'البريد الإلكتروني', 'الحالة', 'تاريخ التسجيل', 'الإجراءات'].map(h => (
-                  <th key={h} className="text-right text-xs text-gray-500 font-semibold px-5 py-4">{h}</th>
+                  <th key={h} className="text-right text-xs text-muted font-semibold px-5 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {isLoading ? (
                 Array.from({ length: 5 }, (_, i) => (
-                  <tr key={i} className="border-b border-gray-100 animate-pulse">
+                  <tr key={i} className="border-b border-border animate-pulse">
                     {[1,2,3,4,5].map(j => (
                       <td key={j} className="px-5 py-4">
-                        <div className="h-4 bg-gray-200 rounded" />
+                        <div className="h-4 bg-background rounded" />
                       </td>
                     ))}
                   </tr>
                 ))
               ) : data?.students?.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="text-center py-12 text-gray-400">
+                  <td colSpan={5} className="text-center py-12 text-muted">
                     <Users className="w-10 h-10 mx-auto mb-2 opacity-30" />
                     لا توجد نتائج
                   </td>
                 </tr>
               ) : (
                 data?.students?.map((student: any) => (
-                  <tr key={student.id} className="border-b border-gray-100 hover:bg-gray-50/60 transition-colors">
+                  <tr key={student.id} className="border-b border-border hover:bg-background/60 transition-colors">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-sm font-bold flex-shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-primary text-sm font-bold flex-shrink-0">
                           {student.name?.[0]?.toUpperCase()}
                         </div>
-                        <span className="font-semibold text-gray-900 text-sm">{student.name}</span>
+                        <span className="font-semibold text-white text-sm">{student.name}</span>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-gray-500 text-sm" dir="ltr">{student.email}</td>
+                    <td className="px-5 py-4 text-muted text-sm" dir="ltr">{student.email}</td>
                     <td className="px-5 py-4">
                       <span className={`text-xs px-2 py-1 rounded-full font-semibold ${STATUS_COLORS[student.status] || STATUS_COLORS.inactive}`}>
                         {STATUS_LABELS[student.status] || student.status}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-gray-500 text-sm">
+                    <td className="px-5 py-4 text-muted text-sm">
                       {new Date(student.created_at).toLocaleDateString('ar-EG')}
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => navigate(`/admin/students/${student.id}`)} title="عرض الملف" className="text-blue-600 hover:text-blue-700 transition-colors">
+                        <button onClick={() => navigate(`/admin/students/${student.id}`)} title="عرض الملف" className="text-blue-400 hover:text-blue-300 transition-colors">
                           <Eye className="w-4 h-4" />
                         </button>
                         {student.status === 'active' ? (
@@ -209,11 +209,11 @@ const StudentsPage = () => {
                             <UserX className="w-4 h-4" />
                           </button>
                         ) : (
-                          <button onClick={() => statusMutation.mutate({ id: student.id, status: 'active' })} title="تفعيل" className="text-emerald-600 hover:text-emerald-700 transition-colors">
+                          <button onClick={() => statusMutation.mutate({ id: student.id, status: 'active' })} title="تفعيل" className="text-green-400 hover:text-green-500 transition-colors">
                             <UserCheck className="w-4 h-4" />
                           </button>
                         )}
-                        <button onClick={() => setDeleteConfirm(student.id)} title="حذف" className="text-red-500 hover:text-red-600 transition-colors">
+                        <button onClick={() => setDeleteConfirm(student.id)} title="حذف" className="text-red-400 hover:text-red-300 transition-colors">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -226,12 +226,12 @@ const StudentsPage = () => {
         </div>
         {/* Pagination */}
         {data?.pages > 1 && (
-          <div className="flex justify-center gap-2 p-4 border-t border-gray-200">
+          <div className="flex justify-center gap-2 p-4 border-t border-border">
             {Array.from({ length: data.pages }, (_, i) => i + 1).map(p => (
               <button
                 key={p}
                 onClick={() => setPage(p)}
-                className={`w-9 h-9 rounded-lg font-bold transition-colors text-sm ${p === page ? 'bg-indigo-600 text-white shadow-sm' : 'bg-[#f4f7fe] border border-gray-200 text-gray-600 hover:border-indigo-600'}`}
+                className={`w-9 h-9 rounded-lg font-bold transition-colors text-sm ${p === page ? 'bg-primary text-white shadow-lg' : 'bg-background border border-border text-muted hover:border-primary'}`}
               >
                 {p}
               </button>

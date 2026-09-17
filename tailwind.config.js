@@ -4,14 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#4f46e5',
-        'primary-dark': '#4338ca',
-        background: '#f4f7fe',
-        card: '#ffffff',
-        sidebar: '#ffffff',
-        border: '#e2e8f0',
-        muted: '#64748b',
-        accent: '#4f46e5',
+        primary: '#2563eb',
+        'primary-dark': '#1d4ed8',
+        background: '#0f1535',
+        card: '#1a2342',
+        sidebar: '#131b38',
+        border: '#2d3a5c',
+        muted: '#94a3b8',
+        accent: '#2563eb',
       },
       fontFamily: {
         arabic: ['Cairo', 'Tajawal', 'sans-serif'],

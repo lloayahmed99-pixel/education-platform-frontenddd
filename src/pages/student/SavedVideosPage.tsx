@@ -33,33 +33,33 @@ const SavedVideosPage = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <Bookmark className="w-7 h-7 text-indigo-600" />
+      <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+        <Bookmark className="w-7 h-7 text-primary" />
         الفيديوهات المحفوظة
       </h1>
 
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
           {[1, 2, 3].map(i => (
-            <div key={i} className="h-48 bg-gray-200 rounded-2xl border border-gray-200" />
+            <div key={i} className="h-48 bg-background rounded-2xl border border-border" />
           ))}
         </div>
       ) : videos && videos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.map((video: any) => (
-            <div key={video.id} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:border-indigo-400 transition-colors group">
-              <div className="relative h-36 bg-gray-100">
+            <div key={video.id} className="bg-card rounded-2xl border border-border shadow-lg overflow-hidden hover:border-primary transition-colors group">
+              <div className="relative h-36 bg-background">
                 {video.thumbnail ? (
                   <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <PlayCircle className="w-10 h-10 text-gray-400" />
+                    <PlayCircle className="w-10 h-10 text-muted" />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button
                     onClick={() => navigate(`/student/video/${video.id}`)}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-3 shadow-md"
+                    className="bg-primary hover:brightness-110 text-white rounded-full p-3 shadow-md"
                   >
                     <PlayCircle className="w-6 h-6" />
                   </button>
@@ -71,18 +71,18 @@ const SavedVideosPage = () => {
                 )}
               </div>
               <div className="p-4">
-                <h3 className="font-bold text-gray-900 text-sm mb-2 line-clamp-2">{video.title}</h3>
+                <h3 className="font-bold text-white text-sm mb-2 line-clamp-2">{video.title}</h3>
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => navigate(`/student/video/${video.id}`)}
-                    className="text-xs text-indigo-600 hover:underline flex items-center gap-1 font-medium"
+                    className="text-xs text-primary hover:underline flex items-center gap-1 font-medium"
                   >
                     <PlayCircle className="w-3 h-3" />
                     مشاهدة
                   </button>
                   <button
                     onClick={() => unsaveMutation.mutate(video.id)}
-                    className="text-xs text-red-500 hover:text-red-700 flex items-center gap-1 transition-colors"
+                    className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition-colors"
                   >
                     <Trash2 className="w-3 h-3" />
                     إلغاء الحفظ
@@ -93,7 +93,7 @@ const SavedVideosPage = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 text-gray-500">
+        <div className="text-center py-20 text-muted">
           <Bookmark className="w-16 h-16 mx-auto mb-4 opacity-30" />
           <p className="text-lg font-semibold">لا توجد فيديوهات محفوظة</p>
           <p className="text-sm mt-2">احفظ الفيديوهات المفضلة أثناء المشاهدة</p>

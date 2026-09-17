@@ -61,13 +61,13 @@ const ForumPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <MessageSquare className="w-7 h-7 text-indigo-600" />
+        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <MessageSquare className="w-7 h-7 text-primary" />
           المنتدى
         </h1>
         <button
           onClick={() => setShowNewPost(true)}
-          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-sm"
+          className="flex items-center gap-2 bg-primary hover:brightness-110 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-lg"
         >
           <Plus className="w-4 h-4" />
           مقال جديد
@@ -76,11 +76,11 @@ const ForumPage = () => {
 
       {/* New Post Modal */}
       {showNewPost && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-gray-200 shadow-xl rounded-2xl p-6 w-full max-w-lg">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-card border border-border shadow-lg rounded-2xl p-6 w-full max-w-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold text-gray-900">مقال جديد</h2>
-              <button onClick={() => setShowNewPost(false)} className="text-gray-400 hover:text-gray-700">
+              <h2 className="text-lg font-bold text-white">مقال جديد</h2>
+              <button onClick={() => setShowNewPost(false)} className="text-muted hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -89,19 +89,19 @@ const ForumPage = () => {
                 value={newPost.title}
                 onChange={e => setNewPost(p => ({ ...p, title: e.target.value }))}
                 placeholder="عنوان المقال"
-                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600"
+                className="w-full bg-card border border-border rounded-xl px-4 py-3 text-white placeholder-muted focus:outline-none focus:border-primary"
               />
               <textarea
                 value={newPost.content}
                 onChange={e => setNewPost(p => ({ ...p, content: e.target.value }))}
                 placeholder="محتوى المقال..."
                 rows={5}
-                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600 resize-none"
+                className="w-full bg-card border border-border rounded-xl px-4 py-3 text-white placeholder-muted focus:outline-none focus:border-primary resize-none"
               />
               <button
                 onClick={() => createMutation.mutate()}
                 disabled={createMutation.isPending || !newPost.title || !newPost.content}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 shadow-sm"
+                className="w-full bg-primary hover:brightness-110 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 shadow-lg"
               >
                 {createMutation.isPending ? 'جاري النشر...' : 'نشر المقال'}
               </button>
@@ -112,34 +112,34 @@ const ForumPage = () => {
 
       {/* Post Detail Modal */}
       {selectedPost && postDetail && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-end sm:items-center justify-center p-4">
-          <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-start">
-              <h2 className="text-lg font-bold text-gray-900 flex-1 ml-2">{postDetail.title}</h2>
-              <button onClick={() => setSelectedPost(null)} className="text-gray-400 hover:text-gray-700 flex-shrink-0">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-4">
+          <div className="bg-card border border-border shadow-lg rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-card border-b border-border p-4 flex justify-between items-start">
+              <h2 className="text-lg font-bold text-white flex-1 ml-2">{postDetail.title}</h2>
+              <button onClick={() => setSelectedPost(null)} className="text-muted hover:text-white flex-shrink-0">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6 space-y-6">
               <div>
-                <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                  <span className="font-semibold text-indigo-600">{postDetail.author?.name}</span>
+                <div className="flex items-center gap-2 text-xs text-muted mb-3">
+                  <span className="font-semibold text-primary">{postDetail.author?.name}</span>
                   <span>·</span>
                   <span>{formatDate(postDetail.created_at)}</span>
                 </div>
-                <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">{postDetail.content}</p>
+                <p className="text-white leading-relaxed whitespace-pre-wrap">{postDetail.content}</p>
               </div>
               {/* Comments */}
               <div>
-                <h3 className="font-bold text-gray-900 mb-3">التعليقات ({postDetail.comments?.length || 0})</h3>
+                <h3 className="font-bold text-white mb-3">التعليقات ({postDetail.comments?.length || 0})</h3>
                 <div className="space-y-3 mb-4">
                   {postDetail.comments?.map((c: any) => (
-                    <div key={c.id} className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                    <div key={c.id} className="bg-background border border-border rounded-xl p-4">
                       <div className="flex justify-between items-start">
-                        <span className="text-xs text-indigo-600 font-semibold">{c.author?.name}</span>
-                        <span className="text-xs text-gray-500">{formatDate(c.created_at)}</span>
+                        <span className="text-xs text-primary font-semibold">{c.author?.name}</span>
+                        <span className="text-xs text-muted">{formatDate(c.created_at)}</span>
                       </div>
-                      <p className="text-sm text-gray-700 mt-1">{c.content}</p>
+                      <p className="text-sm text-white mt-1">{c.content}</p>
                     </div>
                   ))}
                 </div>
@@ -148,12 +148,12 @@ const ForumPage = () => {
                     value={comment}
                     onChange={e => setComment(e.target.value)}
                     placeholder="أضف تعليقاً..."
-                    className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600 text-sm"
+                    className="flex-1 bg-card border border-border rounded-xl px-4 py-2 text-white placeholder-muted focus:outline-none focus:border-primary text-sm"
                   />
                   <button
                     onClick={() => commentMutation.mutate()}
                     disabled={!comment || commentMutation.isPending}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-colors disabled:opacity-60 shadow-sm"
+                    className="bg-primary text-white px-4 py-2 rounded-xl font-bold text-sm hover:brightness-110 transition-colors disabled:opacity-60 shadow-lg"
                   >
                     إضافة
                   </button>
@@ -167,34 +167,34 @@ const ForumPage = () => {
       {/* Posts List */}
       {isLoading ? (
         <div className="space-y-3 animate-pulse">
-          {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-24 bg-gray-200 rounded-2xl border border-gray-200" />)}
+          {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-24 bg-background rounded-2xl border border-border" />)}
         </div>
       ) : data?.posts && data.posts.length > 0 ? (
         <div className="space-y-3">
           {data.posts.map((post: any) => (
             <div
               key={post.id}
-              className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 hover:border-indigo-400 transition-colors cursor-pointer"
+              className="bg-card rounded-2xl border border-border shadow-lg p-5 hover:border-primary transition-colors cursor-pointer"
               onClick={() => setSelectedPost(post)}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-gray-900 mb-1 hover:text-indigo-600 transition-colors truncate">
+                  <h3 className="font-bold text-white mb-1 hover:text-primary transition-colors truncate">
                     {post.title}
                   </h3>
-                  <p className="text-gray-500 text-sm line-clamp-2">{post.content}</p>
+                  <p className="text-muted text-sm line-clamp-2">{post.content}</p>
                 </div>
                 {(user?.role === 'admin' || user?.role === 'moderator') && (
                   <button
                     onClick={e => { e.stopPropagation(); deleteMutation.mutate(post.id); }}
-                    className="text-red-500 hover:text-red-700 transition-colors flex-shrink-0"
+                    className="text-red-400 hover:text-red-300 transition-colors flex-shrink-0"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
               </div>
-              <div className="flex items-center gap-4 mt-3 text-xs text-gray-500">
-                <span className="text-indigo-600 font-semibold">{post.author?.name}</span>
+              <div className="flex items-center gap-4 mt-3 text-xs text-muted">
+                <span className="text-primary font-semibold">{post.author?.name}</span>
                 <span className="flex items-center gap-1">
                   <MessageSquare className="w-3 h-3" />
                   {post.comments_count || 0}
@@ -213,7 +213,7 @@ const ForumPage = () => {
                 <button
                   key={p}
                   onClick={() => setPage(p)}
-                  className={`w-9 h-9 rounded-lg font-bold transition-colors ${p === page ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white border border-gray-200 text-gray-600 hover:border-indigo-400 hover:text-indigo-600'}`}
+                  className={`w-9 h-9 rounded-lg font-bold transition-colors ${p === page ? 'bg-primary text-white shadow-lg' : 'bg-card border border-border text-muted hover:border-primary hover:text-primary'}`}
                 >
                   {p}
                 </button>
@@ -222,7 +222,7 @@ const ForumPage = () => {
           )}
         </div>
       ) : (
-        <div className="text-center py-20 text-gray-500">
+        <div className="text-center py-20 text-muted">
           <MessageSquare className="w-16 h-16 mx-auto mb-4 opacity-30" />
           <p className="text-lg">لا توجد مقالات بعد</p>
           <p className="text-sm mt-2">كن أول من يكتب مقالاً!</p>
