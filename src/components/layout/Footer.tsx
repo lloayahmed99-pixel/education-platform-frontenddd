@@ -34,16 +34,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-card border-t border-border mt-auto">
+    <footer className="bg-white border-t border-gray-200 mt-auto">
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Pages */}
           <div>
-            <h3 className="font-bold text-white mb-4">الصفحات</h3>
+            <h3 className="font-bold text-gray-900 mb-4">الصفحات</h3>
             <ul className="space-y-2">
               {pages.map(p => (
                 <li key={p.label}>
-                  <a href={p.path} className="text-muted hover:text-primary transition-colors text-sm">
+                  <a href={p.path} className="text-gray-500 hover:text-indigo-600 transition-colors text-sm">
                     {p.label}
                   </a>
                 </li>
@@ -53,30 +53,30 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className="font-bold text-white mb-4">السوشيال ميديا</h3>
+            <h3 className="font-bold text-gray-900 mb-4">السوشيال ميديا</h3>
             <ul className="space-y-2">
               {socials.length > 0 ? socials.map(s => (
                 <li key={s.label}>
                   <a href={s.url} target="_blank" rel="noreferrer"
-                    className="flex items-center gap-2 text-muted hover:text-primary transition-colors text-sm">
+                    className="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">
                     <s.icon className="w-4 h-4" />
                     {s.label}
                   </a>
                 </li>
               )) : (
-                <li className="text-muted text-sm">لا توجد روابط</li>
+                <li className="text-gray-400 text-sm">لا توجد روابط</li>
               )}
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h3 className="font-bold text-white mb-4">تواصل الدعم العلمي</h3>
+            <h3 className="font-bold text-gray-900 mb-4">تواصل الدعم العلمي</h3>
             <ul className="space-y-2">
               {support.map(s => (
                 <li key={s.label}>
                   <a href={s.url || '#'} target="_blank" rel="noreferrer"
-                    className="text-muted hover:text-primary transition-colors text-sm">
+                    className="text-gray-500 hover:text-indigo-600 transition-colors text-sm">
                     {s.label}
                   </a>
                 </li>
@@ -85,12 +85,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-6 text-center">
+        <div className="border-t border-gray-200 mt-8 pt-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <BookOpen className="w-5 h-5 text-primary" />
-            <span className="font-bold text-white">{platformName}</span>
+            <BookOpen className="w-5 h-5 text-indigo-600" />
+            <span className="font-bold text-gray-900">{platformName}</span>
           </div>
-          <p className="text-muted text-sm">
+          <p className="text-gray-400 text-sm">
             جميع الحقوق محفوظة © {new Date().getFullYear()} {platformName}
           </p>
         </div>

@@ -87,7 +87,7 @@ const SettingsPage = () => {
   if (isLoading) {
     return (
       <div className="animate-pulse space-y-4">
-        {[1,2,3,4].map(i => <div key={i} className="h-48 bg-card rounded-2xl border border-border" />)}
+        {[1,2,3,4].map(i => <div key={i} className="h-48 bg-white rounded-2xl border border-gray-200 shadow-sm" />)}
       </div>
     );
   }
@@ -95,14 +95,14 @@ const SettingsPage = () => {
   return (
     <div className="space-y-6 max-w-3xl">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <Settings className="w-7 h-7 text-primary" />
+        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <Settings className="w-7 h-7 text-indigo-600" />
           إعدادات المنصة
         </h1>
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 bg-primary hover:bg-amber-500 text-white font-bold px-5 py-2.5 rounded-xl transition-colors disabled:opacity-60"
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-xl transition-colors disabled:opacity-60 shadow-sm"
         >
           <Save className="w-4 h-4" />
           {saving ? 'جاري الحفظ...' : 'حفظ الإعدادات'}
@@ -110,33 +110,33 @@ const SettingsPage = () => {
       </div>
 
       {SETTING_GROUPS.map(group => (
-        <div key={group.title} className="bg-card border border-border rounded-2xl p-6">
-          <h2 className="text-lg font-bold text-white mb-5 pb-3 border-b border-border">{group.title}</h2>
+        <div key={group.title} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100">{group.title}</h2>
           <div className="space-y-4">
             {group.fields.map(field => (
               <div key={field.key}>
-                <label className="block text-sm font-semibold text-muted mb-2">{field.label}</label>
+                <label className="block text-sm font-semibold text-gray-500 mb-2">{field.label}</label>
                 {field.type === 'textarea' ? (
                   <textarea
                     value={values[field.key] || ''}
                     onChange={e => handleChange(field.key, e.target.value)}
                     rows={3}
-                    className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary resize-none"
+                    className="w-full bg-[#f4f7fe] border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-600 resize-none"
                   />
                 ) : field.type === 'color' ? (
                   <div className="flex items-center gap-3">
                     <input
                       type="color"
-                      value={values[field.key] || '#f59e0b'}
+                      value={values[field.key] || '#4f46e5'}
                       onChange={e => handleChange(field.key, e.target.value)}
-                      className="w-12 h-12 rounded-xl border border-border cursor-pointer bg-transparent p-1"
+                      className="w-12 h-12 rounded-xl border border-gray-200 cursor-pointer bg-transparent p-1"
                     />
                     <input
                       type="text"
                       value={values[field.key] || ''}
                       onChange={e => handleChange(field.key, e.target.value)}
-                      placeholder="#f59e0b"
-                      className="flex-1 bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary font-mono"
+                      placeholder="#4f46e5"
+                      className="flex-1 bg-[#f4f7fe] border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-600 font-mono"
                       dir="ltr"
                     />
                   </div>
@@ -146,7 +146,7 @@ const SettingsPage = () => {
                     value={values[field.key] || ''}
                     onChange={e => handleChange(field.key, e.target.value)}
                     dir={field.type === 'email' || field.type === 'url' ? 'ltr' : 'rtl'}
-                    className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary"
+                    className="w-full bg-[#f4f7fe] border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-600"
                   />
                 )}
               </div>

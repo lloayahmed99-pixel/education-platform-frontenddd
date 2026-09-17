@@ -17,11 +17,11 @@ const StudentLayout = () => {
   ];
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-[#f4f7fe]">
       {/* Sidebar - Right side (RTL) */}
-      <aside className={`fixed inset-y-0 right-0 z-50 w-64 bg-sidebar border-l border-border transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex items-center justify-center h-16 border-b border-border">
-          <h1 className="text-2xl font-bold text-primary">منصة العلم</h1>
+      <aside className={`fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg border-l border-gray-200 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex items-center justify-center h-16 border-b border-gray-200">
+          <h1 className="text-2xl font-bold text-indigo-600">منصة العلم</h1>
         </div>
         <nav className="p-4 space-y-2">
           {navItems.map((item) => (
@@ -30,7 +30,7 @@ const StudentLayout = () => {
               to={item.path}
               className={({ isActive }) =>
                 `flex items-center px-4 py-3 rounded-lg transition-colors ${
-                  isActive ? 'bg-primary text-white' : 'text-muted hover:bg-card hover:text-white'
+                  isActive ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-600'
                 }`
               }
             >
@@ -40,7 +40,7 @@ const StudentLayout = () => {
           ))}
           <button
             onClick={logout}
-            className="flex items-center w-full px-4 py-3 rounded-lg text-red-500 hover:bg-card transition-colors"
+            className="flex items-center w-full px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
           >
             <LogOut className="w-5 h-5 ml-3" />
             <span className="font-semibold">تسجيل الخروج</span>
@@ -51,23 +51,23 @@ const StudentLayout = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Header */}
-        <header className="h-16 flex items-center justify-between px-6 bg-card border-b border-border">
+        <header className="h-16 flex items-center justify-between px-6 bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center lg:hidden">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-gray-600">
               <Menu className="w-6 h-6" />
             </button>
           </div>
           <div className="flex-1"></div>
           <div className="flex items-center space-x-reverse space-x-4">
-            <div className="flex items-center text-primary font-bold bg-background px-3 py-1 rounded-full">
+            <div className="flex items-center text-indigo-600 font-bold bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full">
               <span>{user?.points || 0} نقطة</span>
             </div>
-            <button className="text-muted hover:text-white transition-colors">
+            <button className="text-gray-400 hover:text-gray-600 transition-colors">
               <Bell className="w-6 h-6" />
             </button>
-            <div className="flex items-center space-x-reverse space-x-2 border-r border-border pr-4">
-              <img src={user?.avatar || 'https://via.placeholder.com/40'} alt="Avatar" className="w-10 h-10 rounded-full border border-primary" />
-              <span className="font-semibold text-sm hidden sm:block">{user?.name}</span>
+            <div className="flex items-center space-x-reverse space-x-2 border-r border-gray-200 pr-4">
+              <img src={user?.avatar || 'https://via.placeholder.com/40'} alt="Avatar" className="w-10 h-10 rounded-full border border-indigo-400" />
+              <span className="text-gray-800 font-semibold text-sm hidden sm:block">{user?.name}</span>
             </div>
           </div>
         </header>
@@ -84,7 +84,7 @@ const StudentLayout = () => {
       {/* Mobile overlay */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         ></div>
       )}

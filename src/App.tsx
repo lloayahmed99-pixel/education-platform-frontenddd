@@ -74,14 +74,15 @@ const App = () => {
           position="top-center"
           toastOptions={{
             style: {
-              background: '#1e293b',
-              color: '#f8fafc',
-              border: '1px solid #334155',
+              background: '#ffffff',
+              color: '#1e293b',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               fontFamily: 'Cairo, sans-serif',
               direction: 'rtl',
+              boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
             },
-            success: { iconTheme: { primary: '#f59e0b', secondary: '#fff' } },
+            success: { iconTheme: { primary: '#4f46e5', secondary: '#fff' } },
           }}
         />
         <Routes>

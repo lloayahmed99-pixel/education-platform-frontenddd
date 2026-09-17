@@ -17,18 +17,18 @@ const CoursesPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-          <BookOpen className="w-7 h-7 text-primary" />
+        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <BookOpen className="w-7 h-7 text-indigo-600" />
           الكورسات
         </h1>
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted w-5 h-5" />
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
             placeholder="ابحث عن كورس..."
-            className="w-full bg-card border border-border rounded-xl px-4 py-2 pr-10 text-white placeholder-muted focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 pr-10 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-600 transition-colors shadow-sm"
           />
         </div>
       </div>
@@ -36,7 +36,7 @@ const CoursesPage = () => {
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
           {[1, 2, 3, 4, 5, 6].map(i => (
-            <div key={i} className="h-72 bg-card rounded-2xl border border-border" />
+            <div key={i} className="h-72 bg-white rounded-2xl border border-gray-200 shadow-sm" />
           ))}
         </div>
       ) : data?.courses && data.courses.length > 0 ? (
@@ -54,7 +54,7 @@ const CoursesPage = () => {
                   key={p}
                   onClick={() => setPage(p)}
                   className={`w-9 h-9 rounded-lg font-bold transition-colors ${
-                    p === page ? 'bg-primary text-white' : 'bg-card border border-border text-muted hover:border-primary hover:text-white'
+                    p === page ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-500 hover:border-indigo-400 hover:text-indigo-600'
                   }`}
                 >
                   {p}
@@ -64,7 +64,7 @@ const CoursesPage = () => {
           )}
         </>
       ) : (
-        <div className="text-center py-20 text-muted">
+        <div className="text-center py-20 text-gray-400">
           <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-30" />
           <p className="text-lg">لا توجد كورسات</p>
           {search && <p className="text-sm mt-2">جرب البحث بكلمة مختلفة</p>}

@@ -1,18 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: '#f59e0b',
-        'primary-dark': '#d97706',
-        background: '#0f172a',
-        card: '#1e293b',
-        sidebar: '#1e293b',
-        border: '#334155',
-        muted: '#94a3b8',
-        accent: '#f59e0b',
+        primary: '#4f46e5',
+        'primary-dark': '#4338ca',
+        background: '#f4f7fe',
+        card: '#ffffff',
+        sidebar: '#ffffff',
+        border: '#e2e8f0',
+        muted: '#64748b',
+        accent: '#4f46e5',
       },
       fontFamily: {
         arabic: ['Cairo', 'Tajawal', 'sans-serif'],

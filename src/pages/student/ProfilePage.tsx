@@ -37,14 +37,14 @@ const ProfilePage = () => {
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-        <User className="w-7 h-7 text-primary" />
+      <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+        <User className="w-7 h-7 text-indigo-600" />
         حسابي
       </h1>
 
       {/* Avatar Section */}
-      <div className="bg-card border border-border rounded-2xl p-6 flex items-center gap-6">
-        <div className="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary text-2xl font-bold flex-shrink-0 overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-2xl p-6 flex items-center gap-6 shadow-sm">
+        <div className="w-20 h-20 rounded-full bg-indigo-100 border-2 border-indigo-400 flex items-center justify-center text-indigo-600 text-2xl font-bold flex-shrink-0 overflow-hidden">
           {profileImage || user?.profile_image ? (
             <img src={profileImage || user?.profile_image} alt={user?.name} className="w-full h-full object-cover" />
           ) : (
@@ -52,9 +52,9 @@ const ProfilePage = () => {
           )}
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white">{name}</h2>
-          <p className="text-muted text-sm">{user?.email}</p>
-          <span className="inline-block mt-2 bg-primary/20 text-primary text-xs px-3 py-1 rounded-full font-semibold">
+          <h2 className="text-xl font-bold text-gray-900">{name}</h2>
+          <p className="text-gray-500 text-sm">{user?.email}</p>
+          <span className="inline-block mt-2 bg-indigo-100 text-indigo-600 text-xs px-3 py-1 rounded-full font-semibold">
             طالب
           </span>
         </div>
@@ -68,16 +68,16 @@ const ProfilePage = () => {
           { label: 'فيديوهات محفوظة', value: stats?.savedVideos ?? 0 },
           { label: 'اختبارات مكتملة', value: stats?.quizzesCompleted ?? 0 },
         ].map(s => (
-          <div key={s.label} className="bg-card border border-border rounded-2xl p-4 text-center">
-            <h3 className="text-2xl font-bold text-primary">{s.value}</h3>
-            <p className="text-xs text-muted mt-1">{s.label}</p>
+          <div key={s.label} className="bg-white border border-gray-200 rounded-2xl p-4 text-center shadow-sm">
+            <h3 className="text-2xl font-bold text-indigo-600">{s.value}</h3>
+            <p className="text-xs text-gray-500 mt-1">{s.label}</p>
           </div>
         ))}
       </div>
 
       {/* Edit Info */}
-      <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
-        <h3 className="font-bold text-white text-lg">تعديل المعلومات</h3>
+      <div className="bg-white border border-gray-200 rounded-2xl p-6 space-y-4 shadow-sm">
+        <h3 className="font-bold text-gray-900 text-lg">تعديل المعلومات</h3>
         
         <ImageUpload 
           label="الصورة الشخصية"
@@ -86,34 +86,34 @@ const ProfilePage = () => {
         />
         
         <div>
-          <label className="text-sm text-muted font-semibold block mb-2">الاسم</label>
+          <label className="text-sm text-gray-600 font-semibold block mb-2">الاسم</label>
           <input
             value={name}
             onChange={e => setName(e.target.value)}
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-600 transition-colors"
           />
         </div>
         <div>
-          <label className="text-sm text-muted font-semibold block mb-2">البريد الإلكتروني</label>
+          <label className="text-sm text-gray-600 font-semibold block mb-2">البريد الإلكتروني</label>
           <input
             value={user?.email || ''}
             disabled
             dir="ltr"
-            className="w-full bg-background/50 border border-border/50 rounded-xl px-4 py-3 text-muted cursor-not-allowed text-left"
+            className="w-full bg-gray-100 border border-gray-200 rounded-xl px-4 py-3 text-gray-400 cursor-not-allowed text-left"
           />
         </div>
         <div className="flex gap-3">
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex-1 bg-primary hover:bg-amber-500 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
           >
             <Save className="w-4 h-4" />
             {saving ? 'جاري الحفظ...' : 'حفظ التغييرات'}
           </button>
           <button
             onClick={() => { logout(); window.location.href = '/login'; }}
-            className="flex items-center gap-2 border border-red-500/50 text-red-400 hover:bg-red-400/10 px-4 py-3 rounded-xl font-bold transition-colors"
+            className="flex items-center gap-2 border border-red-200 text-red-500 hover:bg-red-50 px-4 py-3 rounded-xl font-bold transition-colors"
           >
             <LogOut className="w-4 h-4" />
             خروج

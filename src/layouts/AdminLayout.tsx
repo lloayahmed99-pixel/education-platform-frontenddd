@@ -24,15 +24,15 @@ const AdminLayout = () => {
   const handleLogout = () => { logout(); navigate('/login'); };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-[#f4f7fe]">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 right-0 z-50 w-64 bg-card border-l border-border transform transition-transform duration-300 lg:relative lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex items-center justify-between h-16 px-5 border-b border-border">
-          <h1 className="text-xl font-bold text-primary flex items-center gap-2">
+      <aside className={`fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg border-l border-gray-200 transform transition-transform duration-300 lg:relative lg:translate-x-0 flex flex-col ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex items-center justify-between h-16 px-5 border-b border-gray-200">
+          <h1 className="text-xl font-bold text-indigo-600 flex items-center gap-2">
             <BookOpenCheck className="w-6 h-6" />
             لوحة الإدارة
           </h1>
-          <button onClick={() => setSidebarOpen(false)} className="text-muted hover:text-white lg:hidden">
+          <button onClick={() => setSidebarOpen(false)} className="text-gray-500 hover:text-gray-800 lg:hidden">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -43,7 +43,7 @@ const AdminLayout = () => {
               to={item.path}
               onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
-                `flex items-center px-4 py-2.5 rounded-xl transition-colors text-sm ${isActive ? 'bg-primary text-white font-bold' : 'text-muted hover:bg-background hover:text-white'}`
+                `flex items-center px-4 py-2.5 rounded-xl transition-colors text-sm ${isActive ? 'bg-indigo-600 text-white font-bold' : 'text-gray-600 hover:bg-indigo-50 hover:text-indigo-600'}`
               }
             >
               <item.icon className="w-4 h-4 ml-3 flex-shrink-0" />
@@ -52,7 +52,7 @@ const AdminLayout = () => {
           ))}
           <button
             onClick={handleLogout}
-            className="flex items-center w-full px-4 py-2.5 rounded-xl text-red-400 hover:bg-red-400/10 transition-colors text-sm mt-2"
+            className="flex items-center w-full px-4 py-2.5 rounded-xl text-red-500 hover:bg-red-50 transition-colors text-sm mt-2"
           >
             <LogOut className="w-4 h-4 ml-3" />
             تسجيل الخروج
@@ -62,19 +62,19 @@ const AdminLayout = () => {
 
       {/* Main */}
       <main className="flex-1 flex flex-col h-full overflow-hidden">
-        <header className="h-16 flex items-center justify-between px-6 bg-card border-b border-border flex-shrink-0">
-          <button onClick={() => setSidebarOpen(true)} className="text-muted hover:text-white lg:hidden">
+        <header className="h-16 flex items-center justify-between px-6 bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
+          <button onClick={() => setSidebarOpen(true)} className="text-gray-600 hover:text-gray-900 lg:hidden">
             <Menu className="w-6 h-6" />
           </button>
           <div className="flex-1" />
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-primary text-sm font-bold">
+              <div className="w-8 h-8 rounded-full bg-indigo-100 border border-indigo-300 flex items-center justify-center text-indigo-600 text-sm font-bold">
                 {user?.name?.[0]?.toUpperCase()}
               </div>
               <div className="hidden sm:block">
-                <p className="text-sm font-bold text-white">{user?.name}</p>
-                <p className="text-xs text-muted">مدير النظام</p>
+                <p className="text-sm font-bold text-gray-800">{user?.name}</p>
+                <p className="text-xs text-gray-500">مدير النظام</p>
               </div>
             </div>
           </div>
